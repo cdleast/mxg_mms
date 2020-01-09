@@ -1,29 +1,6 @@
-# mxg_mms
+|- utils                                                // 封装工具文件夹
+    |- request                                          // axios 封装
 
-## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+|- api                                                  // 调用接口文件夹
+    |- test                                             // 测试文件
