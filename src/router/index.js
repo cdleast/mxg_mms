@@ -10,12 +10,13 @@ VueRouter.prototype.push = function push(location) {
 Vue.use(VueRouter)
 
 const routes = [
-	{ path: '/', redirect: '/login' },
-	{
-		path: '/login',
-		name: 'login',
-		component: () => import('@/views/login')
-	}
+	// { path: '/', redirect: '/login' },
+	{ path: '/login', name: 'login', component: () => import('@/views/login') },
+	{ path: '/', name: 'layout', component: () => import('@/components/Layout') },
+	{ path: '/member', name: 'member', component: () => import('@/views/member') },
+	{ path: '/supplier', name: 'supplier', component: () => import('@/views/supplier') },
+	{ path: '/goods', name: 'goods', component: () => import('@/views/goods') },
+	{ path: '/staff', name: 'staff', component: () => import('@/views/staff') },
 ]
 
 const router = new VueRouter({
