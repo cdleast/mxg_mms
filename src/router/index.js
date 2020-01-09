@@ -10,13 +10,32 @@ VueRouter.prototype.push = function push(location) {
 Vue.use(VueRouter)
 
 const routes = [
-	// { path: '/', redirect: '/login' },
 	{ path: '/login', name: 'login', component: () => import('@/views/login') },
-	{ path: '/', name: 'layout', component: () => import('@/components/Layout') },
-	{ path: '/member', name: 'member', component: () => import('@/views/member') },
-	{ path: '/supplier', name: 'supplier', component: () => import('@/views/supplier') },
-	{ path: '/goods', name: 'goods', component: () => import('@/views/goods') },
-	{ path: '/staff', name: 'staff', component: () => import('@/views/staff') },
+	{
+		path: '/', name: 'layout', redirect: '/home', component: () => import('@/components/Layout'), children: [
+			{ path: '/home', meta: { title: '首页' }, name: 'home', component: () => import('@/views/home') }
+		]
+	},
+	{
+		path: '/member', component: () => import('@/components/Layout'), children: [
+			{ path: '/', meta: { title: '会员管理' }, name: 'member', component: () => import('@/views/member') }
+		]
+	},
+	{
+		path: '/supplier', component: () => import('@/components/Layout'), children: [
+			{ path: '/', meta: { title: '供应商管理' }, name: 'supplier', component: () => import('@/views/supplier') }
+		]
+	},
+	{
+		path: '/goods', component: () => import('@/components/Layout'), children: [
+			{ path: '/', meta: { title: '商品管理' }, name: 'goods', component: () => import('@/views/goods') }
+		]
+	},
+	{
+		path: '/staff', component: () => import('@/components/Layout'), children: [
+			{ path: '/', meta: { title: '员工管理' }, name: 'staff', component: () => import('@/views/staff') }
+		]
+	}
 ]
 
 const router = new VueRouter({
