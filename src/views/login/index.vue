@@ -50,7 +50,7 @@ export default {
                                 // 获取到了用户的数据
                                 const respUser = res.data;
                                 if (respUser.flag) {
-                                    console.log('userInfo', respUser.data)
+                                    // console.log('userInfo', respUser.data)
                                     // 保存 token ，用户信息
                                     localStorage.setItem(
                                         "mxg-msm-user",
