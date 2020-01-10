@@ -56,7 +56,7 @@ export default {
                     this.$message({
                         message: resp.message,
                         type: "warning",
-                        duration: 500 // 弹出停留时间
+                        duration: 3000 // 弹出停留时间
                     });
                 }
             });

@@ -3,4 +3,10 @@
 
 
 |- api                                                  // 调用接口文件夹
-    |- test                                             // 测试文件
+    |- login                                            // 登录/退出
+
+
+
+|- permission.js                                        // 系统权限拦截功能
+|- .env.development                                     // 开发环境接口变量
+|- .env.production                                      // 生产环境接口变量

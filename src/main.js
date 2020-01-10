@@ -5,7 +5,7 @@ import axios from 'axios' // axios
 import App from './App.vue'
 import router from './router'
 import store from './store'
-
+import './permission' // 权限拦截
 
 // 全局使用
 Vue.use(ElementUI)
