@@ -8,8 +8,8 @@
             <el-form-item prop="name">
                 <el-input v-model="searchMap.name" placeholder="会员名字"></el-input>
             </el-form-item>
-            <el-form-item>
-                <el-select v-model="searchMap.region" placeholder="支付类型">
+            <el-form-item prop="payType">
+                <el-select v-model="searchMap.payType" placeholder="支付类型">
                     <!-- 不要忘记 payTypeOptions 绑定到data中 -->
                     <el-option
                         v-for="option in payTypeOptions"
@@ -31,6 +31,7 @@
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="fetchData">查询</el-button>
+                <el-button @click="resetForm('searchForm')">重置</el-button>
             </el-form-item>
         </el-form>
 
@@ -145,6 +146,11 @@ export default {
         handleCurrentChange(val) {
             this.currentPage = val;
             this.fetchData();
+        },
+        // 重置按钮
+        resetForm(formName) {
+            // 重置会看 el-form-item 组件元素的 prop 上是否指定了字段名，指定了才会重置生效
+            this.$refs[formName].resetFields();
         },
         // 编辑单条数据列表
         handleEdit() {},
