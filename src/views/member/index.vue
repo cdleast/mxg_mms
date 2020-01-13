@@ -2,17 +2,35 @@
     <div class="member">
         <!-- :inline="true 表单一行显示 -->
         <el-form ref="searchForm" :inline="true" :model="searchMap" class="demo-form-inline">
-            <el-form-item label="审批人">
-                <el-input v-model="searchMap.user" placeholder="审批人"></el-input>
+            <el-form-item prop="cardNum">
+                <el-input v-model="searchMap.cardNum" placeholder="会员卡号"></el-input>
             </el-form-item>
-            <el-form-item label="活动区域">
-                <el-select v-model="searchMap.region" placeholder="活动区域">
-                    <el-option label="区域一" value="shanghai"></el-option>
-                    <el-option label="区域二" value="beijing"></el-option>
-                </el-select>
+            <el-form-item prop="name">
+                <el-input v-model="searchMap.name" placeholder="会员名字"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="onSubmit">查询</el-button>
+                <el-select v-model="searchMap.region" placeholder="支付类型">
+                    <!-- 不要忘记 payTypeOptions 绑定到data中 -->
+                    <el-option
+                        v-for="option in payTypeOptions"
+                        :key="option.type"
+                        :label="option.name"
+                        :value="option.type"
+                    ></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item prop="birthday">
+                <!-- value-format 是指定绑定值的格式 -->
+                <el-date-picker
+                    style="width: 200px"
+                    value-format="yyyy-MM-dd"
+                    v-model="searchMap.birthday"
+                    type="date"
+                    placeholder="出生日期"
+                ></el-date-picker>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @click="fetchData">查询</el-button>
             </el-form-item>
         </el-form>
 
@@ -77,11 +95,12 @@ export default {
             pageSize: 20, // 每页显示10条数据,
             searchMap: {
                 // 条件查询绑定的条件值
-                cardNum: "",
-                name: "",
-                payType: "",
-                birthday: ""
-            }
+                cardNum: "", // 会员卡号
+                name: "", // 会员姓名
+                payType: "", // 支付类型
+                birthday: "" // 出生日期
+            },
+            payTypeOptions // 下拉框中，支付类型 payTypeOptions: payTypeOptions
         };
     },
     created() {
