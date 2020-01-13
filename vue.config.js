@@ -4,7 +4,7 @@ module.exports = {
         host: "localhost", //主机名， 127.0.0.1，  真机 0.0.0.0
         https: false, //协议
         open: true, //启动服务时自动打开浏览器访问
-        proxy: { // 开发环境代理配置，配置跨域
+        proxy: { // 开发环境代理配置
             // '/dev-api': {
             [process.env.VUE_APP_BASE_API]: {
                 // 目标服务器地址，代理访问 http://localhost:8001

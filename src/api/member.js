@@ -18,7 +18,7 @@ export default {
             data: searchMap
         })
     },
-
+    
     // 新增会员 
     add(pojo) {
         return request({
@@ -35,7 +35,6 @@ export default {
             method: 'get'
         })
     },
-
     // 更新数据
     update(pojo) {
         return request({
