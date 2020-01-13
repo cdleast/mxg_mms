@@ -63,8 +63,8 @@
 
         <!-- 分页功能 -->
         <el-pagination
-            @size-change="fetchData"
-            @current-change="fetchData"
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
             :current-page="currentPage"
             :page-sizes="[10, 20, 50]"
             :page-size="pageSize"
@@ -135,6 +135,16 @@ export default {
             // memberApi.getList().then(res => {
             //     this.list = res.data.data;
             // });
+        },
+        // 当每页显示条数改变后,被触发 , val 是最新的每页显示条数
+        handleSizeChange(val) {
+            this.pageSize = val;
+            this.fetchData();
+        },
+        // 当页码改变后,被触发 , val 是最新的页面
+        handleCurrentChange(val) {
+            this.currentPage = val;
+            this.fetchData();
         },
         // 编辑单条数据列表
         handleEdit() {},
