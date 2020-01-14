@@ -245,15 +245,33 @@ export default {
             // 重置会看 el-form-item 组件元素的 prop 上是否指定了字段名，指定了才会重置生效
             this.$refs[formName].resetFields();
         },
-        // 新增会员表单弹出状态
+        // 弹出新增窗口
         handleAdd() {
             this.dialogFormVisible = true;
+            this.$nextTick(() => {
+                // this.$nextTick()它是一个异步事件，当渲染结束 之后 ，它的回调函数才会被执行
+                // 弹出窗口打开之后 ，需要加载Dom, 就需要花费一点时间，我们就应该等待它加载完dom之后，再进行调用resetFields方法，重置表单和清除样式
+                this.$refs["pojoForm"].resetFields();
+            });
         },
         // 提交会员表单数据
         addData(formName) {
             this.$refs[formName].validate(valid => {
                 if (valid) {
-                    console.log(111)
+                    memberApi.add(this.pojo).then(res => {
+                        const resp = res.data;
+                        if (resp.flag) {
+                            // 新增成功，刷新列表数据
+                            this.fetchData();
+                            this.dialogFormVisible = false; // 关闭窗口
+                        } else {
+                            // 失败，来点提示信息
+                            this.$message({
+                                message: resp.message,
+                                type: "warning"
+                            });
+                        }
+                    });
                 } else {
                     return false;
                 }
