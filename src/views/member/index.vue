@@ -129,11 +129,11 @@
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <el-button @click="dialogFormVisible = false">取 消</el-button>
-                <el-button type="primary" @click="addData('pojoForm')">确 定</el-button>
-                <!-- <el-button
+                <!-- <el-button type="primary" @click="addData('pojoForm')">确 定</el-button> -->
+                <el-button
                     type="primary"
                     @click="pojo.id === null ? addData('pojoForm'): updateData('pojoForm')"
-                >确 定</el-button>-->
+                >确 定</el-button>
             </div>
         </el-dialog>
     </div>
@@ -278,9 +278,65 @@ export default {
             });
         },
         // 编辑单条数据列表
-        handleEdit(id) {},
+        handleEdit(id) {
+            this.handleAdd();
+            memberApi.getById(id).then(res => {
+                const resp = res.data;
+                if (resp.flag) {
+                    this.pojo = resp.data;
+                }
+            });
+        },
+        // 编辑更新按钮提交数据
+        updateData(formName) {
+            this.$refs[formName].validate(valid => {
+                if (valid) {
+                    // 提交更新
+                    memberApi.update(this.pojo).then(response => {
+                        const resp = response.data;
+                        if (resp.flag) {
+                            // 刷新列表
+                            this.fetchData();
+                            this.dialogFormVisible = false;
+                        } else {
+                            this.$message({
+                                message: resp.message,
+                                type: "warning"
+                            });
+                        }
+                    });
+                } else {
+                    return false;
+                }
+            });
+        },
         // 删除单条数据列表
-        handleDelete(id) {}
+        handleDelete(id) {
+            this.$confirm("确认删除这条记录吗？", "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
+            })
+                .then(() => {
+                    memberApi.deleteById(id).then(response => {
+                        const resp = response.data;
+                        this.$message({
+                            message: resp.message,
+                            type: resp.flag ? "success" : "error"
+                        });
+                        if (resp.flag) {
+                            // 删除成功，刷新列表数据
+                            this.fetchData();
+                        }
+                    });
+                })
+                .catch(() => {
+                    this.$message({
+                        type: "info",
+                        message: "已取消删除"
+                    });
+                });
+        }
     }
 };
 </script>
