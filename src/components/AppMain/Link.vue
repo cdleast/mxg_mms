@@ -13,6 +13,9 @@ export default {
 </script>
 
 <style scoped>
+.link {
+    margin-bottom: 20px;
+}
 .el-breadcrumb {
     height: 10px;
     padding: 20px;

@@ -342,7 +342,4 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-.demo-form-inline {
-    margin-top: 20px;
-}
 </style>

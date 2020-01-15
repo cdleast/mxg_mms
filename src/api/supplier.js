@@ -1,10 +1,10 @@
 import request from '@/utils/request'
 
 export default {
-    // 获取会员列表数据
+    // 获取供应商列表数据
     getList() {
         return request({
-            url: '/member/list',
+            url: '/supplier/list',
             method: 'get'
         })
     },
@@ -13,42 +13,42 @@ export default {
     // page 当前页码, size每页查询条数, searchMap条件查询的条件值
     search(page, size, searchMap) {
         return request({
-            url: `/member/list/search/${page}/${size}`,
+            url: `/supplier/list/search/${page}/${size}`,
             method: 'post',
             data: searchMap
         })
     },
 
-    // 新增会员 
+    // 新增供应商
     add(pojo) {
         return request({
-            url: '/member',
+            url: '/supplier',
             method: 'post',
             data: pojo
         })
     },
 
-    // 通过ID查询会员信息
+    // 通过ID查询供应商信息
     getById(id) {
         return request({
-            url: `/member/${id}`,
+            url: `/supplier/${id}`,
             method: 'get'
         })
     },
-    
-    // 更新会员数据
+
+    // 更新供应商操作
     update(pojo) {
         return request({
-            url: `/member/${pojo.id}`,
+            url: `/supplier/${pojo.id}`,
             method: 'put',
             data: pojo
         })
     },
 
-    //删除会员
+    // 删除供应商
     deleteById(id) {
         return request({
-            url: `/member/${id}`,
+            url: `/supplier/${id}`,
             method: 'delete'
         })
     }
